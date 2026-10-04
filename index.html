@@ -3,110 +3,217 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>镜中嫁衣</title>
+<title>镜中嫁衣｜完整互动版</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#080606;color:#ead8c5;font-family:"Microsoft YaHei",serif;min-height:100vh;display:grid;place-items:center}
-#game{width:min(900px,94vw);height:min(680px,92vh);position:relative;overflow:hidden;border:1px solid #50342d;border-radius:14px;background:radial-gradient(circle at 50% 40%,#321414,#090707 60%);box-shadow:0 0 50px #000}
-.page{display:none;height:100%;padding:28px;position:relative}.page.on{display:flex;flex-direction:column}.center{align-items:center;justify-content:center;text-align:center}
-h1{font-size:clamp(38px,7vw,70px);letter-spacing:12px;margin:8px;color:#e8c9ad;text-shadow:0 0 18px #8b211b}h2{letter-spacing:5px;color:#d9b99e}
-p{line-height:1.9;color:#cbb8aa}.small{color:#907b73;font-size:13px;letter-spacing:3px}
-button{cursor:pointer;border:1px solid #704940;background:#1d1110;color:#e5c6ac;padding:11px 24px;margin:6px;border-radius:5px;transition:.2s}
-button:hover{background:#501817;border-color:#ad6b5d;transform:translateY(-1px)}
-.top{display:flex;justify-content:space-between;border-bottom:1px solid #3b2724;padding-bottom:10px}.scene{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.room{width:min(680px,94%);height:300px;position:relative;border:1px solid #422c28;border-radius:10px;background:linear-gradient(#161010,#0b0808)}
-.obj{position:absolute;font-size:48px;cursor:pointer;transition:.2s}.obj:hover{transform:scale(1.12);filter:drop-shadow(0 0 10px #a3342c)}
-.mirror{right:10%;top:16%}.door{left:9%;bottom:10%}.table{left:43%;bottom:13%}.lamp{left:47%;top:7%}.box{right:40%;bottom:14%}
-#log{min-height:58px;text-align:center;color:#bba79b;margin:12px}.inv{font-size:13px;color:#bba99d}.tag{border:1px solid #44302c;padding:4px 8px;margin-left:4px}
-.mframe{width:min(420px,75%);height:350px;border:12px solid #432923;border-radius:50% 50% 8px 8px;display:grid;place-items:center;background:radial-gradient(ellipse,#351919,#080707 70%);box-shadow:inset 0 0 30px #8a241c,0 0 35px #000}
-.ghost{font-size:82px;animation:b 2.5s infinite}.clock{color:#d3aa90}@keyframes b{50%{transform:translateY(-5px) scale(1.03)}}
-input{width:58px;height:62px;margin:4px;background:#100c0c;color:#eac7a6;border:1px solid #654038;border-radius:5px;text-align:center;font-size:30px}
-.red{color:#c55247}.end{font-size:40px;letter-spacing:7px;color:#e4bea2}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#070506;color:#ead8c6;font-family:"Microsoft YaHei","Noto Serif SC",serif}
+body{min-height:100vh;display:grid;place-items:center}
+#game{width:min(960px,95vw);height:min(720px,94vh);position:relative;overflow:hidden;border:1px solid #4e302b;border-radius:14px;background:
+radial-gradient(circle at 50% 35%,rgba(120,25,20,.2),transparent 35%),linear-gradient(145deg,#191010,#080707 70%);
+box-shadow:0 0 55px #000,inset 0 0 90px #000}
+#game:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:50;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 4px);opacity:.7}
+.page{display:none;position:absolute;inset:0;padding:28px;z-index:2}.page.on{display:flex;flex-direction:column}
+.center{justify-content:center;align-items:center;text-align:center}
+h1{font-size:clamp(38px,7vw,72px);letter-spacing:12px;margin:8px;color:#e9c9aa;text-shadow:0 0 20px #8d2019}
+h2{letter-spacing:5px;color:#d9b99f;margin:8px 0 16px}
+h3{color:#d6b49c}.small{font-size:13px;color:#8e7770;letter-spacing:3px}
+p{line-height:1.9;color:#cbb9ac}
+button{font:inherit;cursor:pointer;border:1px solid #70483e;background:#1b1010;color:#e6c6aa;padding:11px 24px;margin:6px;border-radius:5px;transition:.2s}
+button:hover{background:#521817;border-color:#b36d5e;transform:translateY(-1px)}
+button:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #392623;padding-bottom:11px}
+.main{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.room{width:min(760px,96%);height:330px;position:relative;border:1px solid #412a27;border-radius:10px;background:
+radial-gradient(circle at 50% 52%,rgba(125,38,25,.12),transparent 32%),linear-gradient(#171010,#0b0808);overflow:hidden}
+.obj{position:absolute;font-size:48px;cursor:pointer;user-select:none;transition:.2s;filter:drop-shadow(0 0 4px #000)}
+.obj:hover{transform:scale(1.12);filter:drop-shadow(0 0 12px #a83a30)}
+.lamp{left:48%;top:6%}.mirror{right:9%;top:14%}.altar{left:43%;bottom:11%}.box{right:38%;bottom:13%}.door{left:8%;bottom:8%}.portrait{left:17%;top:20%}
+.log{width:min(760px,96%);min-height:62px;margin:12px 0;text-align:center;color:#bca99d}
+.actions{display:flex;flex-wrap:wrap;justify-content:center}
+.inventory{font-size:13px;color:#c3aea0}.tag{display:inline-block;border:1px solid #49312d;background:#140e0e;padding:4px 7px;margin-left:4px;border-radius:3px}
+.story{width:min(680px,95%);padding:20px;border:1px solid #3e2925;background:rgba(12,8,8,.6);border-radius:8px}
+.mirrorFrame{width:min(440px,72%);height:min(390px,65%);border:12px solid #422822;border-radius:50% 50% 9px 9px;display:grid;place-items:center;background:radial-gradient(ellipse,#3a1a1a,#080707 70%);box-shadow:inset 0 0 35px #8b241d,0 0 35px #000}
+.ghost{font-size:84px;animation:breathe 2.7s infinite}.ghost.glitch{animation:glitch .13s 5}
+@keyframes breathe{50%{transform:translateY(-6px) scale(1.03)}}@keyframes glitch{25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+.clock{color:#d4ab91}
+.code input{width:58px;height:62px;margin:4px;background:#100c0c;border:1px solid #654139;color:#edc7a6;text-align:center;font-size:30px;border-radius:5px}
+.red{color:#c24d43}.good{color:#aebd8c}.bar{width:min(500px,90%);height:8px;background:#1c1212;border:1px solid #3f2925}.bar i{display:block;height:100%;width:0;background:#8d2d25;transition:.3s}
+.endTitle{font-size:clamp(30px,5vw,48px);letter-spacing:6px;color:#e2bea2}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:80}
+#flash.on{animation:flash .5s}@keyframes flash{20%{opacity:.8}100%{opacity:0}}
+#toast{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:#170e0e;border:1px solid #54352f;padding:9px 15px;border-radius:5px;opacity:0;z-index:90;transition:.2s}
+#toast.show{opacity:1}
+@media(max-width:650px){#game{height:95vh;width:97vw}.page{padding:18px}.room{height:285px}.obj{font-size:40px}h1{letter-spacing:7px}.mirrorFrame{height:300px}}
 </style>
 </head>
 <body>
 <div id="game">
-<section id="start" class="page on center">
-<div class="small">午夜 · 旧宅 · 一面不该照的镜子</div>
+<div id="flash"></div><div id="toast"></div>
+
+<section id="title" class="page on center">
+<div class="small">午夜十二点 · 旧宅 · 禁忌铜镜</div>
 <h1>镜中嫁衣</h1>
-<p>有人说，子时之后不要照镜子。<br>因为镜子里的人，可能比你先看见你。</p>
-<button onclick="start()">进入古宅</button>
+<p>七年前，新娘死在出嫁当夜。<br>今晚，你收到一封没有署名的红色请帖。</p>
+<button onclick="begin()">打开请帖</button>
+<p class="small">这是一个单文件网页游戏｜无弹窗｜手机电脑均可玩</p>
+</section>
+
+<section id="intro" class="page center">
+<div class="story">
+<h2>红色请帖</h2>
+<p>「子时入门，丑时寻灯，寅时照镜。<br>若听见有人叫你的名字，千万不要回答。」</p>
+<p>落款只有三个字：<span class="red">沈绾绾</span></p>
+</div>
+<button onclick="enterHouse()">进入古宅</button>
 </section>
 
 <section id="house" class="page">
-<div class="top"><span>🕯️ 古宅 · 偏厅</span><span id="inv" class="inv">空手</span></div>
-<div class="scene">
-<h2>旧宅偏厅</h2>
+<div class="top"><span>🕯️ 第一章 · 偏厅</span><span id="inv" class="inventory">空手</span></div>
+<div class="main">
+<h2 id="roomTitle">旧宅偏厅</h2>
 <div class="room">
-<div class="obj lamp" onclick="look('lamp')">🏮</div>
-<div class="obj mirror" onclick="look('mirror')">🪞</div>
-<div class="obj table" onclick="look('table')">🪔</div>
-<div class="obj box" onclick="look('box')">📦</div>
-<div class="obj door" onclick="look('door')">🚪</div>
+<div class="obj lamp" onclick="inspect('lamp')" title="灯笼">🏮</div>
+<div class="obj mirror" onclick="inspect('mirror')" title="铜镜">🪞</div>
+<div class="obj altar" onclick="inspect('altar')" title="供桌">🪔</div>
+<div class="obj box" onclick="inspect('box')" title="木盒">📦</div>
+<div class="obj door" onclick="inspect('door')" title="房门">🚪</div>
+<div class="obj portrait" onclick="inspect('portrait')" title="画像">🖼️</div>
 </div>
-<div id="log">屋外没有风，屋内却有一盏灯在轻轻晃动。</div>
-<div id="choices"></div>
+<div id="log" class="log">你站在旧宅偏厅。没有风，门上的红纸却在轻轻晃动。</div>
+<div id="actions" class="actions"></div>
 </div>
 </section>
 
-<section id="mirrorPage" class="page center">
-<div class="top"><span>🪞 镜中世界</span><span class="clock" id="clock">03:00</span></div>
-<div class="scene">
-<div class="mframe"><div id="ghost" class="ghost">👰🏻‍♀️</div></div>
-<p id="mtext">镜子里的新娘没有眨眼。</p>
-<div><button onclick="mirror('look')">仔细观察</button><button onclick="mirror('close')">闭上眼睛</button><button onclick="mirror('turn')">转身</button></div>
+<section id="courtyard" class="page">
+<div class="top"><span>🌙 第二章 · 后院</span><span id="inv2" class="inventory"></span></div>
+<div class="main">
+<h2>荒废后院</h2>
+<div class="room">
+<div class="obj lamp" onclick="inspect('well')">🕳️</div>
+<div class="obj mirror" onclick="inspect('paper')" style="font-size:42px">📜</div>
+<div class="obj altar" onclick="inspect('bell')">🔔</div>
+<div class="obj door" onclick="inspect('backdoor')">🚪</div>
+</div>
+<div id="yardlog" class="log">院子中央有一口枯井。井边挂着一串纸铃。</div>
+<div class="actions"><button onclick="backHouse()">回偏厅</button></div>
+</div>
+</section>
+
+<section id="mirror" class="page center">
+<div class="top"><span>🪞 第三章 · 镜中世界</span><span id="clock" class="clock">03:00</span></div>
+<div class="main">
+<div class="mirrorFrame"><div id="ghost" class="ghost">👰🏻‍♀️</div></div>
+<p id="mtext">镜中的新娘低着头，像是在等你说话。</p>
+<div class="actions">
+<button onclick="mirrorChoice('look')">仔细观察</button>
+<button onclick="mirrorChoice('close')">闭上眼睛</button>
+<button onclick="mirrorChoice('turn')">转身</button>
+</div>
 </div>
 </section>
 
 <section id="puzzle" class="page center">
-<div class="scene">
-<div class="small">供桌机关</div><h2>四位数字锁</h2>
-<p>纸条写着：<br>一更听鼓，二更看灯，三更照镜，四更……不要回头。</p>
-<div><input id="a" maxlength="1" inputmode="numeric"><input id="b" maxlength="1" inputmode="numeric"><input id="c" maxlength="1" inputmode="numeric"><input id="d" maxlength="1" inputmode="numeric"></div>
-<button onclick="check()">转动机关</button>
-<div id="plog"></div>
+<div class="main">
+<div class="small">铜镜留下的机关</div>
+<h2>四位数字锁</h2>
+<p>纸条：<br>「灯中第一数，镜中第二数，铜钱第三数，亡者生日为第四数。」</p>
+<div class="code"><input id="c1" maxlength="1" inputmode="numeric"><input id="c2" maxlength="1" inputmode="numeric"><input id="c3" maxlength="1" inputmode="numeric"><input id="c4" maxlength="1" inputmode="numeric"></div>
+<button onclick="solveCode()">打开机关</button>
+<div id="puzzleLog" class="log"></div>
 </div>
 </section>
 
-<section id="end" class="page center">
-<div class="small">故事结束</div><div id="et" class="end"></div><p id="ep"></p>
+<section id="final" class="page center">
+<div class="main">
+<div class="small">终章</div>
+<h2 id="finalTitle" class="endTitle"></h2>
+<p id="finalText"></p>
+<div id="finalExtra" class="story"></div>
 <button onclick="location.reload()">重新开始</button>
+</div>
 </section>
 </div>
 
 <script>
-let items=new Set(), choices=0, timer, sec=180, closed=false, turned=false;
+const S={items:new Set(),seen:new Set(),mirror:0,closed:false,turned:false,visitedYard:false,lit:false};
+let timer=null,sec=180;
 const $=id=>document.getElementById(id);
 function page(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));$(id).classList.add('on')}
-function start(){page('house');}
-function inv(){ $('inv').innerHTML=items.size?[...items].map(x=>'<span class="tag">'+x+'</span>').join(''):'空手' }
-function log(t){$('log').innerHTML=t}
-function look(x){
- if(x==='lamp')log('灯笼里没有火，却映出一个模糊的“7”。你记住了它。');
- if(x==='table'){items.add('铜钱');inv();log('供桌下找到一枚旧铜钱。背面刻着：镜中取另一半。')}
- if(x==='box')log('木盒被锁住了。锁孔像是一枚铜钱的形状。');
- if(x==='door')log(items.has('镜中铜钱')?'门缝里传来声音：“现在，可以离开了。”':'门锁着。门后似乎有人轻轻敲了三下。');
+function begin(){page('intro')}
+function enterHouse(){page('house');updateInv()}
+function updateInv(){let x=S.items.size?[...S.items].map(i=>'<span class="tag">'+i+'</span>').join(''):'空手';$('inv').innerHTML=x;if($('inv2'))$('inv2').innerHTML=x}
+function say(t,buttons=[]){$('log').innerHTML=t;const a=$('actions');a.innerHTML='';buttons.forEach(b=>{let x=document.createElement('button');x.textContent=b.t;x.onclick=b.f;a.appendChild(x)})}
+function yardSay(t){$('yardlog').innerHTML=t}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1300)}
+function flash(){let f=$('flash');f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}
+
+function inspect(x){
+ S.seen.add(x);
+ if(x==='lamp'){
+   S.lit=true;say('你拨开灯罩，发现灯芯里藏着一张纸。上面只有一个数字：<b class="red">7</b>。',{t:'记住数字',f:()=>toast('线索：第一位 = 7')});
+ }
+ if(x==='altar'){
+   S.items.add('旧铜钱');updateInv();
+   say('供桌上有一枚旧铜钱。背面刻着：“月落之前，去后院。”');
+ }
+ if(x==='box'){
+   if(S.items.has('旧铜钱')){S.items.add('红绳');updateInv();say('铜钱刚好能卡进木盒的凹槽。盒子打开，里面是一根红绳和半张生辰帖。')}
+   else say('木盒锁着。锁孔像一枚铜钱。');
+ }
+ if(x==='portrait'){
+   say('画像中的女子穿着嫁衣。她的右手比出“三”。画像背后似乎还有东西。');
+   S.items.add('数字三');updateInv();
+ }
+ if(x==='door'){
+   if(S.seen.has('lamp')&&S.seen.has('altar'))say('偏厅的门自己开了一条缝。外面通向后院。',{t:'进入后院',f:()=>{S.visitedYard=true;page('courtyard')}})
+   else say('门锁着。门后传来很轻的哭声。');
+ }
  if(x==='mirror'){
-   if(!items.has('铜钱'))log('铜镜蒙着灰。镜框刻着：先寻铜钱，再问镜中人。');
-   else{page('mirrorPage');runTimer()}
+   if(!S.items.has('旧铜钱'))say('铜镜被黑布盖着。镜框上刻着：“没有铜钱，不见亡魂。”');
+   else {page('mirror');startTimer()}
+ }
+ if(x==='well')yardSay('你向井里看。没有水，只有一只倒扣的红鞋。你不敢伸手。');
+ if(x==='paper'){
+   S.items.add('生辰帖');updateInv();yardSay('你捡到完整的生辰帖：<b class="red">三月十七</b>。亡者名：沈绾绾。');
+ }
+ if(x==='bell'){
+   if(S.items.has('红绳')){S.items.add('纸铃');updateInv();yardSay('你用红绳系住纸铃。铃响三次后，后院的门打开了。')}
+   else yardSay('纸铃不能取下。铃柄上缠着一根红绳。');
+ }
+ if(x==='backdoor'){
+   if(S.items.has('纸铃')&&S.items.has('生辰帖')){yardSay('门后的红纸写着：“照镜之后，回偏厅开锁。”');setTimeout(()=>page('mirror'),700)}
+   else yardSay('后门被红线封住。你还缺少什么东西。');
  }
 }
-function runTimer(){if(timer)return;timer=setInterval(()=>{sec--;let m=String(Math.floor(sec/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');$('clock').textContent=m+':'+s;if(sec<=0){clearInterval(timer);end('大凶 · 镜中人','你在镜前站得太久。镜中的新娘终于笑了，她走出了镜面。')}},1000)}
-function mirror(x){
- choices++;
- if(x==='look'){items.add('镜中铜钱');inv();$('mtext').textContent='她手里也有一枚铜钱。她翻过铜钱，背面刻着“7”。'}
- if(x==='close'){closed=true;$('mtext').textContent='你闭上眼。有人在耳边说：“别睁眼……我还没有准备好。”'}
- if(x==='turn'){turned=true;$('mtext').textContent='你转身，身后空无一人。但镜子里多了一个站在你背后的人。'}
- if(choices>=2){clearInterval(timer);page('puzzle')}
+function backHouse(){page('house')}
+function startTimer(){
+ if(timer)return;
+ timer=setInterval(()=>{sec--;let m=String(Math.floor(sec/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');$('clock').textContent=m+':'+s;if(sec<=0){clearInterval(timer);ending('大凶结局 · 镜中人','你在镜中停留太久。新娘抬起头，镜面像水一样向外流动。')}} ,1000)
 }
-function check(){
- let code=['1','7','3','4'],v=[$('a').value,$('b').value,$('c').value,$('d').value];
- if(v.join('')===code.join('')){items.add('门钥匙');end('真结局 · 纸人归位','铜镜裂开一道细缝。镜中的新娘把钥匙递给你，纸人倒下，古宅的门终于打开。天亮了。')}
- else{
-  $('plog').innerHTML='<p class="red">不对……镜子里的她摇了摇头。</p><p>提示：第一位数字来自灯笼，镜中会告诉你第二位。</p>';
-  if(closed&&turned)setTimeout(()=>end('坏结局 · 回头','你听见身后有人叫你的名字。你回头了。镜中的新娘笑着向你走来。'),700);
+function mirrorChoice(c){
+ S.mirror++;
+ if(c==='look'){
+  S.items.add('镜中铜钱');updateInv();$('mtext').textContent='她把铜钱翻过来。背面只有一个数字：7。她指向自己的额头。';flash()
+ }
+ if(c==='close'){
+  S.closed=true;$('mtext').textContent='你闭上眼。有人贴着你的耳朵说：“不要相信画像。”';toast('获得线索：画像')
+ }
+ if(c==='turn'){
+  S.turned=true;$('mtext').textContent='你转身。身后没人。再看镜子时，新娘已经站到了你的身后。';$('ghost').classList.add('glitch');flash()
+ }
+ if(S.mirror>=2){clearInterval(timer);page('puzzle')}
+}
+function solveCode(){
+ const v=['c1','c2','c3','c4'].map(id=>$(id).value);
+ if(v.join('')==='7377'){
+   if(S.items.has('纸铃')&&S.items.has('生辰帖'))ending('真结局 · 纸人归位','机关打开。红绳自行燃尽，铜镜里的新娘把完整的铜钱放进你手里。','你把铜钱放回供桌，所有纸人同时低头。天亮时，古宅里只剩一件叠好的嫁衣。')
+   else ending('普通结局 · 门外天亮','机关开了，但仪式还差最后一步。','你逃出了偏厅，却总觉得口袋里多了一枚冰冷的铜钱。回头时，古宅已经消失。')
+ }else{
+   $('puzzleLog').innerHTML='<span class="red">机关没有反应。</span><br>提示：灯笼是7，镜中也出现过7；画像提示“三”；生辰帖是三月十七。';
+   if(S.closed&&S.turned)setTimeout(()=>ending('坏结局 · 回头','你听见沈绾绾在身后叫你的名字。','你回头了。下一秒，镜子里的人变成了你。'),800)
  }
 }
-function end(t,p){clearInterval(timer);$('et').textContent=t;$('ep').textContent=p;page('end')}
+function ending(t,sub,text){clearInterval(timer);$('finalTitle').textContent=t;$('finalText').textContent=sub;$('finalExtra').textContent=text;page('final')}
 </script>
 </body>
 </html>

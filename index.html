@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>红嫁衣 · 古宅</title>
+
+<style>
+/* =========================================================
+   无弹窗版本
+   直接嵌入后台页面即可
+   所有样式使用 pb- 前缀，尽量避免污染后台
+========================================================= */
+
+#paper-bride-game {
+  --pb-red:#8e1010;
+  --pb-dark-red:#430606;
+  --pb-paper:#d8c89e;
+  --pb-black:#070606;
+
+  position:relative;
+  width:100%;
+  min-height:600px;
+  overflow:hidden;
+  background:#120b09;
+  color:#fff;
+  font-family:"Microsoft YaHei","Noto Serif SC",serif;
+}
+
+/* 游戏主体 */
+#paper-bride-game .pb-game {
+  position:relative;
+  width:100%;
+  min-height:600px;
+  height:680px;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      rgba(105,60,40,.22),
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      #21130f 0%,
+      #0c0908 75%,
+      #050404 100%
+    );
+}
+
+/* 墙 */
+#paper-bride-game .pb-wall {
+  position:absolute;
+  inset:0;
+  opacity:.25;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 48px,
+      rgba(255,255,255,.025) 49px,
+      transparent 50px
+    );
+}
+
+/* ===============================
+   顶部标题
+=============================== */
+
+#paper-bride-game .pb-header {
+  position:absolute;
+  z-index:100;
+  top:0;
+  left:0;
+  right:0;
+
+  height:68px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 22px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(27,10,8,.96),
+      rgba(50,16,13,.96),
+      rgba(27,10,8,.96)
+    );
+
+  border-bottom:1px solid #51201a;
+}
+
+#paper-bride-game .pb-title {
+  color:#d9b88a;
+  font-size:18px;
+  letter-spacing:4px;
+}
+
+#paper-bride-game .pb-subtitle {
+  margin-top:4px;
+  color:#80685a;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+/* ===============================
+   窗户
+=============================== */
+
+#paper-bride-game .pb-window-frame {
+  position:absolute;
+
+  width:180px;
+  height:220px;
+
+  left:50%;
+  top:105px;
+
+  transform:translateX(-50%);
+
+  border:9px solid #24130f;
+
+  background:#080909;
+
+  box-shadow:0 0 35px #000;
+}
+
+#paper-bride-game .pb-window-paper {
+  position:absolute;
+  inset:12px;
+  background:#181818;
+}
+
+#paper-bride-game .pb-window-cross {
+  position:absolute;
+  inset:12px;
+}
+
+#paper-bride-game .pb-window-cross::before {
+  content:"";
+  position:absolute;
+
+  width:100%;
+  height:4px;
+
+  top:50%;
+
+  background:#2c1712;
+}
+
+#paper-bride-game .pb-window-cross::after {
+  content:"";
+  position:absolute;
+
+  width:4px;
+  height:100%;
+
+  left:50%;
+
+  background:#2c1712;
+}
+
+/* ===============================
+   红灯笼
+=============================== */
+
+#paper-bride-game .pb-lantern {
+  position:absolute;
+  top:10px;
+  width:76px;
+  text-align:center;
+  z-index:120;
+}
+
+#paper-bride-game .pb-lantern-left {
+  left:7%;
+}
+
+#paper-bride-game .pb-lantern-right {
+  right:7%;
+}
+
+#paper-bride-game .pb-lantern-top {
+  width:10px;
+  height:50px;
+  margin:auto;
+  background:#2c0906;
+}
+
+#paper-bride-game .pb-lantern-body {
+  width:64px;
+  height:82px;
+
+  margin:-4px auto 0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle,
+      #c31b12,
+      #650604 70%
+    );
+
+  border:2px solid #3b0907;
+  border-radius:45%;
+
+  color:#ffd6a0;
+  font-size:28px;
+
+  box-shadow:
+    0 0 25px rgba(170,20,10,.35);
+
+  animation:pb-lantern 2.8s ease-in-out infinite;
+}
+
+@keyframes pb-lantern {
+  0%,100% {
+    filter:brightness(.75);
+  }
+
+  50% {
+    filter:brightness(1.25);
+  }
+}
+
+#paper-bride-game .pb-lantern-bottom {
+  width:40px;
+  height:8px;
+  margin:-2px auto;
+  background:#250504;
+}
+
+/* ===============================
+   铜镜
+=============================== */
+
+#paper-bride-game .pb-mirror {
+  position:absolute;
+
+  z-index:200;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-42%);
+
+  width:230px;
+  height:280px;
+
+  border:13px solid #553b24;
+  border-radius:50% 50% 46% 46%;
+
+  background:#111;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 30px #000,
+    inset 0 0 30px #000;
+
+  transition:
+    box-shadow .25s,
+    transform .25s;
+}
+
+#paper-bride-game .pb-mirror:hover {
+  box-shadow:
+    0 0 45px rgba(160,20,10,.3),
+    inset 0 0 40px #000;
+
+  transform:
+    translate(-50%,-42%)
+    scale(1.015);
+}
+
+#paper-bride-game .pb-mirror-inner {
+  position:absolute;
+  inset:10px;
+
+  overflow:hidden;
+
+  border-radius:50% 50% 45% 45%;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      #373737,
+      #0c0c0c 70%
+    );
+}
+
+#paper-bride-game .pb-mirror-symbol {
+  position:absolute;
+
+  left:50%;
+  top:15px;
+
+  transform:translateX(-50%);
+
+  color:rgba(190,160,110,.22);
+  font-size:30px;
+}
+
+/* ===============================
+   镜中新娘
+=============================== */
+
+#paper-bride-game .pb-bride {
+  position:absolute;
+
+  left:50%;
+  top:56%;
+
+  width:100px;
+  height:170px;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.65);
+
+  opacity:0;
+
+  transition:
+    opacity .5s,
+    transform .7s;
+}
+
+#paper-bride-game .pb-bride-head {
+  position:absolute;
+
+  left:28px;
+  top:0;
+
+  width:44px;
+  height:54px;
+
+  border-radius:50%;
+  background:#17110f;
+}
+
+#paper-bride-game .pb-bride-body {
+  position:absolute;
+
+  left:15px;
+  top:43px;
+
+  width:70px;
+  height:125px;
+
+  background:#160b0a;
+
+  clip-path:
+    polygon(
+      35% 0,
+      65% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+#paper-bride-game .pb-bride-hair {
+  position:absolute;
+
+  top:15px;
+
+  width:30px;
+  height:120px;
+
+  background:#050505;
+}
+
+#paper-bride-game .pb-bride-hair.left {
+  left:8px;
+}
+
+#paper-bride-game .pb-bride-hair.right {
+  right:8px;
+}
+
+#paper-bride-game .pb-red-veil {
+  position:absolute;
+
+  left:8px;
+  top:-10px;
+
+  width:84px;
+  height:125px;
+
+  background:rgba(120,5,5,.55);
+
+  border-radius:50% 50% 15% 15%;
+}
+
+/* ===============================
+   香案
+=============================== */
+
+#paper-bride-game .pb-table {
+  position:absolute;
+
+  z-index:150;
+
+  bottom:0;
+  left:0;
+
+  width:100%;
+  height:145px;
+
+  background:
+    linear-gradient(
+      #321711,
+      #120908
+    );
+
+  border-top:6px solid #24100c;
+}
+
+#paper-bride-game .pb-incense {
+  position:absolute;
+
+  left:50%;
+  top:-68px;
+
+  transform:translateX(-50%);
+}
+
+#paper-bride-game .pb-incense-stick {
+  display:inline-block;
+
+  width:3px;
+  height:52px;
+
+  margin:0 4px;
+
+  background:#8d2518;
+}
+
+#paper-bride-game .pb-smoke {
+  position:absolute;
+
+  width:30px;
+  height:50px;
+
+  border-radius:50%;
+
+  border-left:2px solid rgba(210,210,210,.18);
+
+  animation:pb-smoke 3s infinite;
+}
+
+#paper-bride-game .pb-smoke.s1 {
+  left:-18px;
+  top:-65px;
+}
+
+#paper-bride-game .pb-smoke.s2 {
+  left:8px;
+  top:-75px;
+  animation-delay:1.2s;
+}
+
+@keyframes pb-smoke {
+  0% {
+    opacity:0;
+    transform:
+      translateY(10px)
+      rotate(-8deg);
+  }
+
+  40% {
+    opacity:.8;
+  }
+
+  100% {
+    opacity:0;
+    transform:
+      translateY(-40px)
+      translateX(15px)
+      rotate(10deg);
+  }
+}
+
+/* ===============================
+   红盖头
+=============================== */
+
+#paper-bride-game .pb-veil-item {
+  position:absolute;
+
+  z-index:250;
+
+  right:18%;
+  bottom:105px;
+
+  padding:13px 18px;
+
+  color:#e6c49c;
+
+  background:#57100d;
+
+  border:1px solid #8c3025;
+
+  font-family:inherit;
+
+  cursor:pointer;
+
+  transform:rotate(-4deg);
+
+  transition:.2s;
+}
+
+#paper-bride-game .pb-veil-item:hover {
+  background:#82150f;
+  transform:
+    rotate(-4deg)
+    scale(1.05);
+}
+
+/* ===============================
+   纸钱
+=============================== */
+
+#paper-bride-game .pb-paper-money {
+  position:absolute;
+
+  z-index:250;
+
+  left:18%;
+  bottom:105px;
+
+  width:45px;
+  height:55px;
+
+  border:1px solid #796747;
+
+  background:#d5c69a;
+
+  color:#342719;
+
+  font-family:inherit;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+#paper-bride-game .pb-paper-money:hover {
+  transform:rotate(-8deg) scale(1.08);
+}
+
+/* ===============================
+   符纸
+=============================== */
+
+#paper-bride-game .pb-talisman {
+  position:absolute;
+
+  z-index:250;
+
+  left:12%;
+  top:43%;
+
+  width:45px;
+  height:80px;
+
+  background:#d4bd86;
+
+  border:1px solid #75603c;
+
+  color:#58120d;
+
+  writing-mode:vertical-rl;
+
+  font-family:inherit;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+#paper-bride-game .pb-talisman:hover {
+  filter:brightness(1.2);
+  transform:rotate(-3deg);
+}
+
+/* ===============================
+   提示
+=============================== */
+
+#paper-bride-game .pb-message {
+  position:absolute;
+
+  z-index:500;
+
+  left:50%;
+  bottom:18px;
+
+  transform:translateX(-50%);
+
+  padding:7px 18px;
+
+  color:rgba(230,210,175,.75);
+
+  background:rgba(0,0,0,.55);
+
+  border:1px solid rgba(150,110,80,.15);
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
+  pointer-events:none;
+
+  white-space:nowrap;
+}
+
+/* ===============================
+   恐怖文字
+=============================== */
+
+#paper-bride-game .pb-horror-text {
+  position:absolute;
+
+  z-index:700;
+
+  inset:0;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  color:#e9d3b0;
+
+  font-size:clamp(24px,4vw,46px);
+
+  letter-spacing:8px;
+
+  text-shadow:0 0 20px #900;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:opacity .5s;
+}
+
+/* ===============================
+   黑屏
+=============================== */
+
+#paper-bride-game .pb-blackout {
+  position:absolute;
+
+  inset:0;
+
+  z-index:800;
+
+  background:#000;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:opacity 1s;
+}
+
+/* ===============================
+   底部状态
+=============================== */
+
+#paper-bride-game .pb-footer {
+  position:absolute;
+
+  z-index:600;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:44px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 18px;
+
+  background:#100907;
+
+  border-top:1px solid #35130f;
+
+  color:#70594e;
+
+  font-size:11px;
+}
+
+#paper-bride-game .pb-footer span {
+  color:#b28a6f;
+}
+
+/* ===============================
+   手机
+=============================== */
+
+@media(max-width:600px) {
+
+  #paper-bride-game {
+    min-height:500px;
+  }
+
+  #paper-bride-game .pb-game {
+    height:600px;
+    min-height:500px;
+  }
+
+  #paper-bride-game .pb-mirror {
+    width:190px;
+    height:240px;
+  }
+
+  #paper-bride-game .pb-lantern {
+    transform:scale(.75);
+  }
+
+  #paper-bride-game .pb-veil-item {
+    right:8%;
+  }
+
+  #paper-bride-game .pb-paper-money {
+    left:8%;
+  }
+
+  #paper-bride-game .pb-message {
+    max-width:90%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+}
+</style>
+
+
+<!-- =========================================================
+     游戏 HTML
+========================================================= -->
+
+<div id="paper-bride-game">
+
+  <div class="pb-game">
+
+    <div class="pb-wall"></div>
+
+
+    <!-- 标题 -->
+
+    <div class="pb-header">
+
+      <div>
+        <div class="pb-title">
+          红嫁衣 · 古宅
+        </div>
+
+        <div class="pb-subtitle">
+          民俗秘闻 · 铜镜谜局
+        </div>
+      </div>
+
+      <div class="pb-subtitle">
+        线索 <span id="pb-clues">0 / 3</span>
+      </div>
+
+    </div>
+
+
+    <!-- 窗户 -->
+
+    <div class="pb-window-frame">
+
+      <div class="pb-window-paper"></div>
+
+      <div class="pb-window-cross"></div>
+
+    </div>
+
+
+    <!-- 红灯笼 -->
+
+    <div class="pb-lantern pb-lantern-left">
+
+      <div class="pb-lantern-top"></div>
+
+      <div class="pb-lantern-body">
+        囍
+      </div>
+
+      <div class="pb-lantern-bottom"></div>
+
+    </div>
+
+
+    <div class="pb-lantern pb-lantern-right">
+
+      <div class="pb-lantern-top"></div>
+
+      <div class="pb-lantern-body">
+        囍
+      </div>
+
+      <div class="pb-lantern-bottom"></div>
+
+    </div>
+
+
+    <!-- 铜镜 -->
+
+    <button
+      type="button"
+      class="pb-mirror"
+      id="pb-mirror"
+      aria-label="调查铜镜"
+    >
+
+      <div class="pb-mirror-inner">
+
+        <div class="pb-mirror-symbol">
+          卍
+        </div>
+
+
+        <div
+          class="pb-bride"
+          id="pb-bride"
+        >
+
+          <div class="pb-bride-head"></div>
+
+          <div class="pb-bride-body"></div>
+
+          <div class="pb-bride-hair left"></div>
+
+          <div class="pb-bride-hair right"></div>
+
+          <div class="pb-red-veil"></div>
+
+        </div>
+
+      </div>
+
+    </button>
+
+
+    <!-- 红盖头 -->
+
+    <button
+      type="button"
+      class="pb-veil-item"
+      id="pb-veil"
+    >
+      红盖头
+    </button>
+
+
+    <!-- 纸钱 -->
+
+    <button
+      type="button"
+      class="pb-paper-money"
+      id="pb-money"
+    >
+      冥
+    </button>
+
+
+    <!-- 符纸 -->
+
+    <button
+      type="button"
+      class="pb-talisman"
+      id="pb-talisman"
+    >
+      镇
+    </button>
+
+
+    <!-- 香案 -->
+
+    <div class="pb-table">
+
+      <div class="pb-incense">
+
+        <div class="pb-incense-stick"></div>
+        <div class="pb-incense-stick"></div>
+        <div class="pb-incense-stick"></div>
+
+        <div class="pb-smoke s1"></div>
+        <div class="pb-smoke s2"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 游戏提示 -->
+
+    <div
+      class="pb-message"
+      id="pb-message"
+    >
+      古宅里很安静……
+    </div>
+
+
+    <!-- 恐怖文字 -->
+
+    <div
+      class="pb-horror-text"
+      id="pb-horror-text"
+    >
+      不要回头
+    </div>
+
+
+    <!-- 黑屏 -->
+
+    <div
+      class="pb-blackout"
+      id="pb-blackout"
+    ></div>
+
+
+    <!-- 底部状态 -->
+
+    <div class="pb-footer">
+
+      <div>
+        状态：
+        <span id="pb-status">
+          等待调查
+        </span>
+      </div>
+
+      <div>
+        点击物品寻找线索
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+/* =========================================================
+   红嫁衣游戏逻辑
+   无弹窗版本
+========================================================= */
+
+(function(window) {
+
+  "use strict";
+
+
+  const PaperBrideGame = {
+
+    playing:false,
+
+    clues:0,
+
+    brideSeen:false,
+
+    veilOpened:false,
+
+    ending:false,
+
+
+    init:function() {
+
+      this.root =
+        document.getElementById(
+          "paper-bride-game"
+        );
+
+      if (!this.root) return;
+
+
+      this.game =
+        this.root.querySelector(
+          ".pb-game"
+        );
+
+      this.mirror =
+        this.root.querySelector(
+          "#pb-mirror"
+        );
+
+      this.bride =
+        this.root.querySelector(
+          "#pb-bride"
+        );
+
+      this.message =
+        this.root.querySelector(
+          "#pb-message"
+        );
+
+      this.status =
+        this.root.querySelector(
+          "#pb-status"
+        );
+
+      this.cluesText =
+        this.root.querySelector(
+          "#pb-clues"
+        );
+
+      this.horror =
+        this.root.querySelector(
+          "#pb-horror-text"
+        );
+
+      this.blackout =
+        this.root.querySelector(
+          "#pb-blackout"
+        );
+
+      this.veil =
+        this.root.querySelector(
+          "#pb-veil"
+        );
+
+      this.money =
+        this.root.querySelector(
+          "#pb-money"
+        );
+
+      this.talisman =
+        this.root.querySelector(
+          "#pb-talisman"
+        );
+
+
+      this.bindEvents();
+
+    },
+
+
+    bindEvents:function() {
+
+      const self = this;
+
+
+      /* 铜镜 */
+
+      this.mirror.addEventListener(
+        "click",
+        function() {
+
+          self.inspectMirror();
+
+        }
+      );
+
+
+      /* 红盖头 */
+
+      this.veil.addEventListener(
+        "click",
+        function() {
+
+          self.inspectVeil();
+
+        }
+      );
+
+
+      /* 纸钱 */
+
+      this.money.addEventListener(
+        "click",
+        function() {
+
+          self.inspectMoney();
+
+        }
+      );
+
+
+      /* 符纸 */
+
+      this.talisman.addEventListener(
+        "click",
+        function() {
+
+          self.inspectTalisman();
+
+        }
+      );
+
+    },
+
+
+    start:function() {
+
+      if (this.playing)
+        return;
+
+      this.playing = true;
+
+      this.setStatus(
+        "正在调查古宅"
+      );
+
+      this.setMessage(
+        "点击古宅中的物品寻找线索……"
+      );
+
+    },
+
+
+    inspectMirror:function() {
+
+      if (this.ending)
+        return;
+
+
+      this.start();
+
+
+      this.brideSeen = true;
+
+
+      this.bride.style.opacity =
+        "1";
+
+
+      this.bride.style.transform =
+        "translate(-50%,-50%) scale(1)";
+
+
+      this.setMessage(
+        "铜镜里……好像多了一个人。"
+      );
+
+
+      this.addClue();
+
+
+      if (this.clues >= 3) {
+
+        this.setMessage(
+          "镜中的新娘正在等你揭开盖头。"
+        );
+
+      }
+
+    },
+
+
+    inspectVeil:function() {
+
+      if (this.ending)
+        return;
+
+
+      this.start();
+
+
+      if (!this.brideSeen) {
+
+        this.setMessage(
+          "红盖头下面似乎藏着什么……"
+        );
+
+        return;
+
+      }
+
+
+      if (this.veilOpened) {
+
+        this.setMessage(
+          "你已经碰过它了……"
+        );
+
+        return;
+
+      }
+
+
+      this.veilOpened = true;
+
+
+      this.setMessage(
+        "你伸手碰到了红盖头。"
+      );
+
+
+      this.addClue();
+
+
+      if (this.clues >= 3) {
+
+        setTimeout(
+          () => this.triggerEnding(),
+          900
+        );
+
+      }
+
+    },
+
+
+    inspectMoney:function() {
+
+      if (this.ending)
+        return;
+
+
+      this.start();
+
+
+      this.setMessage(
+        "纸钱背面写着：子时莫回头。"
+      );
+
+
+      this.addClue();
+
+    },
+
+
+    inspectTalisman:function() {
+
+      if (this.ending)
+        return;
+
+
+      this.start();
+
+
+      this.setMessage(
+        "符纸已经被撕开了一角……"
+      );
+
+
+      this.addClue();
+
+    },
+
+
+    addClue:function() {
+
+      if (this.clues >= 3)
+        return;
+
+
+      this.clues++;
+
+
+      this.cluesText.textContent =
+        this.clues + " / 3";
+
+
+      this.setStatus(
+        "发现线索 " +
+        this.clues +
+        " / 3"
+      );
+
+
+      /*
+       * 发现第一个线索时
+       * 背景稍微变暗
+       */
+
+      if (this.clues === 1) {
+
+        this.game.style.filter =
+          "brightness(.9)";
+
+      }
+
+
+      /*
+       * 第二个线索
+       */
+
+      if (this.clues === 2) {
+
+        this.game.style.filter =
+          "brightness(.78)";
+
+      }
+
+
+      /*
+       * 三个线索
+       */
+
+      if (this.clues === 3) {
+
+        this.game.style.filter =
+          "brightness(.62)";
+
+        this.setStatus(
+          "三个线索已经找到"
+        );
+
+      }
+
+    },
+
+
+    triggerEnding:function() {
+
+      if (this.ending)
+        return;
+
+
+      this.ending = true;
+
+
+      this.setStatus(
+        "不要回头"
+      );
+
+
+      this.setMessage(
+        "……有人站在你身后。"
+      );
+
+
+      /*
+       * 新娘突然靠近
+       */
+
+      this.bride.style.opacity =
+        "1";
+
+
+      this.bride.style.transform =
+        "translate(-50%,-50%) scale(2.8)";
+
+
+      /*
+       * 镜子震动
+       */
+
+      this.mirror.animate(
+        [
+          {
+            transform:
+              "translate(-50%,-42%)"
+          },
+
+          {
+            transform:
+              "translate(calc(-50% + 7px),-42%)"
+          },
+
+          {
+            transform:
+              "translate(calc(-50% - 7px),-42%)"
+          },
+
+          {
+            transform:
+              "translate(-50%,-42%)"
+          }
+        ],
+        {
+          duration:500,
+          iterations:4
+        }
+      );
+
+
+      /*
+       * 恐怖文字
+       */
+
+      setTimeout(
+        () => {
+
+          this.horror.style.opacity =
+            "1";
+
+        },
+        700
+      );
+
+
+      /*
+       * 黑屏
+       */
+
+      setTimeout(
+        () => {
+
+          this.blackout.style.opacity =
+            "1";
+
+        },
+        1900
+      );
+
+
+      /*
+       * 自动重新开始
+       */
+
+      setTimeout(
+        () => {
+
+          this.reset();
+
+        },
+        4300
+      );
+
+    },
+
+
+    reset:function() {
+
+      this.playing = false;
+
+      this.clues = 0;
+
+      this.brideSeen = false;
+
+      this.veilOpened = false;
+
+      this.ending = false;
+
+
+      this.cluesText.textContent =
+        "0 / 3";
+
+
+      this.bride.style.opacity =
+        "0";
+
+
+      this.bride.style.transform =
+        "translate(-50%,-50%) scale(.65)";
+
+
+      this.horror.style.opacity =
+        "0";
+
+
+      this.blackout.style.opacity =
+        "0";
+
+
+      this.game.style.filter =
+        "";
+
+
+      this.setStatus(
+        "等待调查"
+      );
+
+
+      this.setMessage(
+        "古宅里很安静……"
+      );
+
+    },
+
+
+    setMessage:function(text) {
+
+      this.message.textContent =
+        text;
+
+    },
+
+
+    setStatus:function(text) {
+
+      this.status.textContent =
+        text;
+
+    }
+
+  };
+
+
+  /*
+   * 暴露给你的后台
+   *
+   * 可以从后台其他 JS 调用：
+   *
+   * PaperBrideGame.start()
+   * PaperBrideGame.reset()
+   */
+
+  window.PaperBrideGame =
+    PaperBrideGame;
+
+
+  /*
+   * 初始化
+   */
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+
+        PaperBrideGame.init();
+
+      }
+    );
+
+  } else {
+
+    PaperBrideGame.init();
+
+  }
+
+
+})(window);
+</script>
